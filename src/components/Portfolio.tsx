@@ -112,10 +112,10 @@ export default function Portfolio({ onBack }: PortfolioProps) {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <a href="https://github.com/gaurav-pande" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
+              <a href="https://github.com/Gaurav-Pande" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com/in/gauravpande" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
+              <a href="https://www.linkedin.com/in/gpande2/" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
                 <Linkedin size={20} />
               </a>
             </div>
