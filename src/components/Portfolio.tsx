@@ -9,17 +9,25 @@ interface PortfolioProps {
 
 const EXPERIENCE = [
   {
-    company: 'Microsoft Azure',
-    role: 'Software Engineer',
-    period: '2019 - Present',
-    description: 'Building intelligent systems at scale. Working on Azure cloud infrastructure and distributed systems.',
+    company: 'Microsoft',
+    role: 'Software Engineer (Machine Learning)',
+    period: '2021 - Present',
+    description: 'Building intelligent systems at scale. Working on Azure cloud infrastructure, distributed systems, and machine learning solutions.',
     tech: ['Python', 'C#', 'Azure', 'Kubernetes', 'TypeScript'],
+  },
+  {
+    company: 'Georgia Institute of Technology',
+    role: 'Master of Science in Computer Science',
+    period: '2019 - 2021',
+    description: 'Graduated with 4.0 GPA. Focused on Machine Learning and Artificial Intelligence. Member of India Club at Georgia Tech.',
+    tech: ['Machine Learning', 'AI', 'Computer Vision', 'NLP'],
+    isEducation: true,
   },
   {
     company: 'Cisco Systems',
     role: 'Software Engineer',
     period: '2017 - 2019',
-    description: 'Developed network automation solutions and SDN controllers for enterprise networking.',
+    description: 'Worked on Innovation Edge team developing network automation solutions and SDN controllers. Contributed to OpenDaylight, an open-source distributed SDN controller.',
     tech: ['Java', 'Python', 'OpenDaylight', 'REST APIs'],
   },
 ];
@@ -74,13 +82,41 @@ function Container({ children, className = '' }: { children: React.ReactNode; cl
 }
 
 export default function Portfolio({ onBack }: PortfolioProps) {
+  // Dark mode colors only
+  const colors = {
+    bg: '#0a0a12',
+    navBg: 'rgba(10, 10, 18, 0.9)',
+    navBorder: 'rgba(255,255,255,0.05)',
+    text: 'white',
+    textMuted: '#9ca3af',
+    textSubtle: '#6b7280',
+    accent: '#fb923c',
+    accentMuted: 'rgba(251, 146, 60, 0.6)',
+    cardBg: 'rgba(255,255,255,0.02)',
+    cardBorder: 'rgba(255,255,255,0.05)',
+    timelineBorder: 'rgba(251, 146, 60, 0.3)',
+    sectionDivider: 'rgba(255,255,255,0.1)',
+    skillBg: 'rgba(251, 146, 60, 0.1)',
+    skillBorder: 'rgba(251, 146, 60, 0.3)',
+    photoBorder: 'rgba(251, 146, 60, 0.4)',
+    photoShadow: 'rgba(251, 146, 60, 0.2)',
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ minHeight: '100vh', backgroundColor: '#0a0a12', color: 'white', overflowX: 'hidden' }}
+      style={{ minHeight: '100vh', backgroundColor: colors.bg, color: colors.text, overflowX: 'hidden' }}
     >
+      {/* CSS Keyframes for animations */}
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+
       {/* Fixed Navigation */}
       <nav style={{ 
         position: 'fixed', 
@@ -88,34 +124,34 @@ export default function Portfolio({ onBack }: PortfolioProps) {
         left: 0, 
         right: 0, 
         zIndex: 50, 
-        backgroundColor: 'rgba(10, 10, 18, 0.9)', 
+        backgroundColor: colors.navBg, 
         backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)'
+        borderBottom: `1px solid ${colors.navBorder}`
       }}>
         <Container>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '16px', paddingBottom: '16px' }}>
             <motion.button
               onClick={onBack}
               whileHover={{ x: -4 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', color: colors.textMuted, background: 'none', border: 'none', cursor: 'pointer' }}
             >
               <ArrowLeft size={18} />
               <span style={{ fontSize: '14px' }}>Back</span>
             </motion.button>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '32px', fontSize: '14px' }}>
-              <a href="#about" style={{ color: '#9ca3af', textDecoration: 'none' }}>About</a>
-              <a href="#experience" style={{ color: '#9ca3af', textDecoration: 'none' }}>Experience</a>
-              <a href="#projects" style={{ color: '#9ca3af', textDecoration: 'none' }}>Projects</a>
-              <a href="#skills" style={{ color: '#9ca3af', textDecoration: 'none' }}>Skills</a>
-              <a href="#contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact</a>
+              <a href="#about" style={{ color: colors.textMuted, textDecoration: 'none' }}>About</a>
+              <a href="#experience" style={{ color: colors.textMuted, textDecoration: 'none' }}>Experience</a>
+              <a href="#projects" style={{ color: colors.textMuted, textDecoration: 'none' }}>Projects</a>
+              <a href="#skills" style={{ color: colors.textMuted, textDecoration: 'none' }}>Skills</a>
+              <a href="#contact" style={{ color: colors.textMuted, textDecoration: 'none' }}>Contact</a>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <a href="https://github.com/Gaurav-Pande" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
+              <a href="https://github.com/Gaurav-Pande" target="_blank" rel="noopener noreferrer" style={{ color: colors.textMuted }}>
                 <Github size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/gpande2/" target="_blank" rel="noopener noreferrer" style={{ color: '#9ca3af' }}>
+              <a href="https://www.linkedin.com/in/gpande2/" target="_blank" rel="noopener noreferrer" style={{ color: colors.textMuted }}>
                 <Linkedin size={20} />
               </a>
             </div>
@@ -126,70 +162,120 @@ export default function Portfolio({ onBack }: PortfolioProps) {
       {/* ============ HERO / ABOUT SECTION ============ */}
       <section id="about" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '80px' }}>
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px', marginBottom: '24px' }}
-            >
-              Hi, my name is
-            </motion.p>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              style={{ fontSize: 'clamp(40px, 8vw, 72px)', fontWeight: 'bold', color: 'white', marginBottom: '16px' }}
-            >
-              Gaurav Pande
-            </motion.h1>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 'bold', color: '#6b7280', marginBottom: '32px' }}
-            >
-              I build things for the cloud.
-            </motion.h2>
-            
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              style={{ color: '#9ca3af', fontSize: '18px', maxWidth: '540px', lineHeight: 1.7, marginBottom: '40px' }}
-            >
-              I&apos;m a software engineer at <span style={{ color: '#fb923c' }}>Microsoft Azure</span>, 
-              specializing in building scalable distributed systems and intelligent applications. 
-              I&apos;m passionate about machine learning, cloud infrastructure, and creating elegant 
-              solutions to complex problems.
-            </motion.p>
-            
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '60px', flexWrap: 'wrap' }}>
+            {/* Left side - Text content */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '24px', fontSize: '14px', color: '#6b7280' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              style={{ flex: '1', minWidth: '300px' }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <MapPin size={16} style={{ color: 'rgba(251, 146, 60, 0.6)' }} />
-                Seattle, WA
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Briefcase size={16} style={{ color: 'rgba(251, 146, 60, 0.6)' }} />
-                Microsoft
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <GraduationCap size={16} style={{ color: 'rgba(251, 146, 60, 0.6)' }} />
-                Georgia Tech
-              </span>
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px', marginBottom: '24px' }}
+              >
+                Hi, my name is
+              </motion.p>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                style={{ fontSize: 'clamp(36px, 6vw, 64px)', fontWeight: 'bold', color: colors.text, marginBottom: '16px', whiteSpace: 'nowrap' }}
+              >
+                Gaurav Pande
+              </motion.h1>
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 'bold', color: colors.textSubtle, marginBottom: '32px' }}
+              >
+                I build things for the cloud.
+              </motion.h2>
+              
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                style={{ color: colors.textMuted, fontSize: '17px', maxWidth: '500px', lineHeight: 1.7, marginBottom: '40px' }}
+              >
+                I&apos;m a software engineer at <span style={{ color: colors.accent }}>Microsoft</span>, 
+                specializing in building scalable distributed systems and machine learning solutions. 
+                Georgia Tech CS grad passionate about AI, cloud infrastructure, and creating elegant 
+                solutions to complex problems.
+              </motion.p>
+            
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '24px', fontSize: '14px', color: colors.textSubtle }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <MapPin size={16} style={{ color: colors.accentMuted }} />
+                  Seattle, WA
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Briefcase size={16} style={{ color: colors.accentMuted }} />
+                  Microsoft
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <GraduationCap size={16} style={{ color: colors.accentMuted }} />
+                  Georgia Tech
+                </span>
+              </motion.div>
             </motion.div>
-          </motion.div>
+
+            {/* Right side - Profile Picture */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              style={{ 
+                flexShrink: 0,
+                position: 'relative',
+              }}
+            >
+              <div style={{
+                width: '280px',
+                height: '280px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: `4px solid ${colors.photoBorder}`,
+                boxShadow: `0 0 40px ${colors.photoShadow}`,
+                position: 'relative',
+              }}>
+                <img 
+                  src="/gaurav.jpg" 
+                  alt="Gaurav Pande"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    filter: 'grayscale(20%)',
+                    transition: 'filter 0.3s ease',
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.filter = 'grayscale(0%)'}
+                  onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(20%)'}
+                />
+              </div>
+              {/* Decorative ring */}
+              <div style={{
+                position: 'absolute',
+                top: '-10px',
+                left: '-10px',
+                right: '-10px',
+                bottom: '-10px',
+                borderRadius: '50%',
+                border: `2px dashed ${colors.accentMuted}`,
+                animation: 'spin 20s linear infinite',
+              }} />
+            </motion.div>
+          </div>
         </Container>
       </section>
 
@@ -202,9 +288,9 @@ export default function Portfolio({ onBack }: PortfolioProps) {
             viewport={{ once: true }}
             style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '64px' }}
           >
-            <span style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px' }}>01.</span>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'white', whiteSpace: 'nowrap' }}>Experience</h2>
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+            <span style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px' }}>01.</span>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: colors.text, whiteSpace: 'nowrap' }}>Experience</h2>
+            <div style={{ flex: 1, height: '1px', backgroundColor: colors.sectionDivider }} />
           </motion.div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginLeft: '16px' }}>
@@ -215,7 +301,7 @@ export default function Portfolio({ onBack }: PortfolioProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                style={{ position: 'relative', paddingLeft: '40px', borderLeft: '2px solid rgba(251, 146, 60, 0.3)' }}
+                style={{ position: 'relative', paddingLeft: '40px', borderLeft: `2px solid ${colors.timelineBorder}` }}
               >
                 {/* Timeline dot */}
                 <div style={{ 
@@ -225,25 +311,25 @@ export default function Portfolio({ onBack }: PortfolioProps) {
                   width: '16px', 
                   height: '16px', 
                   borderRadius: '50%', 
-                  backgroundColor: '#0a0a12', 
-                  border: '3px solid #fb923c' 
+                  backgroundColor: colors.bg, 
+                  border: `3px solid ${colors.accent}` 
                 }} />
                 
-                <p style={{ color: '#6b7280', fontFamily: 'monospace', fontSize: '14px', marginBottom: '12px' }}>{exp.period}</p>
-                <h3 style={{ fontSize: '20px', fontWeight: '600', color: 'white', marginBottom: '12px' }}>
-                  {exp.role} <span style={{ color: '#fb923c' }}>@ {exp.company}</span>
+                <p style={{ color: colors.textSubtle, fontFamily: 'monospace', fontSize: '14px', marginBottom: '12px' }}>{exp.period}</p>
+                <h3 style={{ fontSize: '20px', fontWeight: '600', color: colors.text, marginBottom: '12px' }}>
+                  {exp.role} <span style={{ color: colors.accent }}>@ {exp.company}</span>
                 </h3>
-                <p style={{ color: '#9ca3af', marginBottom: '20px', lineHeight: 1.7 }}>{exp.description}</p>
+                <p style={{ color: colors.textMuted, marginBottom: '20px', lineHeight: 1.7 }}>{exp.description}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                   {exp.tech.map(t => (
                     <span key={t} style={{ 
                       padding: '6px 14px', 
                       fontSize: '12px', 
                       fontFamily: 'monospace', 
-                      color: '#fdba74', 
-                      backgroundColor: 'rgba(251, 146, 60, 0.1)', 
+                      color: colors.accent, 
+                      backgroundColor: colors.skillBg, 
                       borderRadius: '9999px',
-                      border: '1px solid rgba(251, 146, 60, 0.2)'
+                      border: `1px solid ${colors.skillBorder}`
                     }}>
                       {t}
                     </span>
@@ -256,7 +342,7 @@ export default function Portfolio({ onBack }: PortfolioProps) {
       </section>
 
       {/* ============ PROJECTS SECTION ============ */}
-      <section id="projects" style={{ paddingTop: '96px', paddingBottom: '96px', backgroundColor: 'rgba(255,255,255,0.01)' }}>
+      <section id="projects" style={{ paddingTop: '96px', paddingBottom: '96px', backgroundColor: colors.cardBg }}>
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -264,9 +350,9 @@ export default function Portfolio({ onBack }: PortfolioProps) {
             viewport={{ once: true }}
             style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '64px' }}
           >
-            <span style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px' }}>02.</span>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'white', whiteSpace: 'nowrap' }}>Featured Projects</h2>
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+            <span style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px' }}>02.</span>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: colors.text, whiteSpace: 'nowrap' }}>Featured Projects</h2>
+            <div style={{ flex: 1, height: '1px', backgroundColor: colors.sectionDivider }} />
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
@@ -282,22 +368,22 @@ export default function Portfolio({ onBack }: PortfolioProps) {
                   padding: '28px', 
                   borderRadius: '12px', 
                   backgroundColor: '#111118', 
-                  border: '1px solid rgba(255,255,255,0.05)',
+                  border: `1px solid ${colors.cardBorder}`,
                   cursor: 'pointer',
-                  transition: 'border-color 0.2s'
+                  transition: 'border-color 0.2s',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '24px' }}>
-                  <Folder size={44} style={{ color: '#fb923c' }} strokeWidth={1} />
-                  <ExternalLink size={20} style={{ color: '#4b5563' }} />
+                  <Folder size={44} style={{ color: colors.accent }} strokeWidth={1} />
+                  <ExternalLink size={20} style={{ color: colors.textSubtle }} />
                 </div>
-                <h3 style={{ fontSize: '18px', fontWeight: '600', color: 'white', marginBottom: '12px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: '600', color: colors.text, marginBottom: '12px' }}>
                   {project.title}
                 </h3>
-                <p style={{ color: '#9ca3af', fontSize: '14px', marginBottom: '24px', lineHeight: 1.7 }}>
+                <p style={{ color: colors.textMuted, fontSize: '14px', marginBottom: '24px', lineHeight: 1.7 }}>
                   {project.description}
                 </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '12px', fontFamily: 'monospace', color: '#6b7280' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '12px', fontFamily: 'monospace', color: colors.textSubtle }}>
                   {project.tech.map(t => (
                     <span key={t}>{t}</span>
                   ))}
@@ -317,9 +403,9 @@ export default function Portfolio({ onBack }: PortfolioProps) {
             viewport={{ once: true }}
             style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '64px' }}
           >
-            <span style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px' }}>03.</span>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'white', whiteSpace: 'nowrap' }}>Skills & Technologies</h2>
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+            <span style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px' }}>03.</span>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: colors.text, whiteSpace: 'nowrap' }}>Skills & Technologies</h2>
+            <div style={{ flex: 1, height: '1px', backgroundColor: colors.sectionDivider }} />
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '48px' }}>
@@ -331,11 +417,11 @@ export default function Portfolio({ onBack }: PortfolioProps) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <h3 style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{category}</h3>
+                <h3 style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{category}</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {skills.map(skill => (
-                    <li key={skill} style={{ color: '#9ca3af', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(251, 146, 60, 0.6)' }} />
+                    <li key={skill} style={{ color: colors.textMuted, fontSize: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: colors.accentMuted }} />
                       {skill}
                     </li>
                   ))}
@@ -347,7 +433,7 @@ export default function Portfolio({ onBack }: PortfolioProps) {
       </section>
 
       {/* ============ CONTACT SECTION ============ */}
-      <section id="contact" style={{ paddingTop: '96px', paddingBottom: '96px', backgroundColor: 'rgba(255,255,255,0.01)' }}>
+      <section id="contact" style={{ paddingTop: '96px', paddingBottom: '96px', backgroundColor: colors.cardBg }}>
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -355,9 +441,9 @@ export default function Portfolio({ onBack }: PortfolioProps) {
             viewport={{ once: true }}
             style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}
           >
-            <p style={{ color: '#fb923c', fontFamily: 'monospace', fontSize: '14px', marginBottom: '20px' }}>04. What&apos;s Next?</p>
-            <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 'bold', color: 'white', marginBottom: '32px' }}>Get In Touch</h2>
-            <p style={{ color: '#9ca3af', fontSize: '18px', marginBottom: '48px', lineHeight: 1.7 }}>
+            <p style={{ color: colors.accent, fontFamily: 'monospace', fontSize: '14px', marginBottom: '20px' }}>04. What&apos;s Next?</p>
+            <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 'bold', color: colors.text, marginBottom: '32px' }}>Get In Touch</h2>
+            <p style={{ color: colors.textMuted, fontSize: '18px', marginBottom: '48px', lineHeight: 1.7 }}>
               I&apos;m currently open to new opportunities and always happy to connect. 
               Whether you have a question or just want to say hi, my inbox is always open.
             </p>
@@ -371,8 +457,8 @@ export default function Portfolio({ onBack }: PortfolioProps) {
                 gap: '12px', 
                 padding: '16px 40px', 
                 backgroundColor: 'transparent', 
-                border: '2px solid #fb923c', 
-                color: '#fb923c', 
+                border: `2px solid ${colors.accent}`, 
+                color: colors.accent, 
                 borderRadius: '8px', 
                 fontWeight: '500',
                 textDecoration: 'none',
@@ -387,11 +473,11 @@ export default function Portfolio({ onBack }: PortfolioProps) {
       </section>
 
       {/* ============ FOOTER ============ */}
-      <footer style={{ paddingTop: '48px', paddingBottom: '48px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <footer style={{ paddingTop: '48px', paddingBottom: '48px', borderTop: `1px solid ${colors.navBorder}` }}>
         <Container>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ color: '#6b7280', fontSize: '14px' }}>Built with Next.js & Tailwind CSS</p>
-            <p style={{ color: '#4b5563', fontSize: '14px', marginTop: '8px' }}>© {new Date().getFullYear()} Gaurav Pande</p>
+            <p style={{ color: colors.textSubtle, fontSize: '14px' }}>✨ Vibe coded with Next.js & Tailwind CSS</p>
+            <p style={{ color: colors.textMuted, fontSize: '14px', marginTop: '8px' }}>© {new Date().getFullYear()} Gaurav Pande</p>
           </div>
         </Container>
       </footer>

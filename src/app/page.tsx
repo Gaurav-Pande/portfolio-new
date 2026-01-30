@@ -11,7 +11,7 @@ type ViewState = 'home' | 'warping' | 'portfolio';
 export default function Home() {
   const [viewState, setViewState] = useState<ViewState>('home');
 
-  const handleBlackHoleClick = () => {
+  const handleEnterClick = () => {
     setViewState('warping');
   };
 
@@ -29,7 +29,7 @@ export default function Home() {
         {viewState === 'home' && (
           <BlackHoleHero 
             key="home" 
-            onBlackHoleClick={handleBlackHoleClick} 
+            onBlackHoleClick={handleEnterClick} 
           />
         )}
         

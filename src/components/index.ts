@@ -5,3 +5,6 @@ export { default as InteractiveHero } from './InteractiveHero';
 export { default as Typewriter } from './Typewriter';
 export { default as Footer } from './Footer';
 export { default as LayoutWrapper } from './LayoutWrapper';
+export { default as Portfolio } from './Portfolio';
+export { default as BlackHoleHero } from './BlackHoleHero';
+export { default as WarpTransition } from './WarpTransition';
